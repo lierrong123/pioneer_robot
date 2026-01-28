@@ -1,0 +1,179 @@
+[0.051s] Invoking command in '/home/wheeltec/lierrong_ws/src/point_lio_ros2/build/point_lio': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/foxy /usr/bin/cmake /home/wheeltec/lierrong_ws/src/point_lio_ros2 -DCMAKE_INSTALL_PREFIX=/home/wheeltec/lierrong_ws/src/point_lio_ros2/install/point_lio
+[0.283s] -- The C compiler identification is GNU 9.4.0
+[0.473s] -- The CXX compiler identification is GNU 9.4.0
+[0.488s] -- Check for working C compiler: /usr/bin/cc
+[0.672s] -- Check for working C compiler: /usr/bin/cc -- works
+[0.674s] -- Detecting C compiler ABI info
+[0.888s] -- Detecting C compiler ABI info - done
+[0.912s] -- Detecting C compile features
+[0.912s] -- Detecting C compile features - done
+[0.914s] -- Check for working CXX compiler: /usr/bin/c++
+[1.188s] -- Check for working CXX compiler: /usr/bin/c++ -- works
+[1.190s] -- Detecting CXX compiler ABI info
+[1.396s] -- Detecting CXX compiler ABI info - done
+[1.414s] -- Detecting CXX compile features
+[1.415s] -- Detecting CXX compile features - done
+[1.416s] -- Current CPU architecture: aarch64
+[1.440s] -- Found ament_cmake: 0.9.12 (/opt/ros/foxy/share/ament_cmake/cmake)
+[1.519s] -- Found PythonInterp: /usr/bin/python3 (found suitable version "3.8.10", minimum required is "3") 
+[1.520s] -- Using PYTHON_EXECUTABLE: /usr/bin/python3
+[2.228s] -- Found rclcpp: 2.4.3 (/opt/ros/foxy/share/rclcpp/cmake)
+[2.492s] -- Using all available rosidl_typesupport_c: rosidl_typesupport_fastrtps_c;rosidl_typesupport_introspection_c
+[2.530s] -- Found rosidl_adapter: 1.3.1 (/opt/ros/foxy/share/rosidl_adapter/cmake)
+[2.918s] -- Found OpenSSL: /usr/lib/aarch64-linux-gnu/libcrypto.so (found version "1.1.1f")  
+[3.024s] -- Found FastRTPS: /opt/ros/foxy/include  
+[3.259s] -- Using all available rosidl_typesupport_cpp: rosidl_typesupport_fastrtps_cpp;rosidl_typesupport_introspection_cpp
+[3.439s] -- Found rmw_implementation_cmake: 1.0.4 (/opt/ros/foxy/share/rmw_implementation_cmake/cmake)
+[3.443s] -- Using RMW implementation 'rmw_fastrtps_cpp' as default
+[3.445s] -- Looking for pthread.h
+[3.667s] -- Looking for pthread.h - found
+[3.668s] -- Performing Test CMAKE_HAVE_LIBC_PTHREAD
+[3.926s] -- Performing Test CMAKE_HAVE_LIBC_PTHREAD - Failed
+[3.926s] -- Looking for pthread_create in pthreads
+[4.163s] -- Looking for pthread_create in pthreads - not found
+[4.164s] -- Looking for pthread_create in pthread
+[4.385s] -- Looking for pthread_create in pthread - found
+[4.386s] -- Found Threads: TRUE  
+[4.953s] -- Found rclpy: 1.0.13 (/opt/ros/foxy/share/rclpy/cmake)
+[5.001s] -- Found geometry_msgs: 2.0.5 (/opt/ros/foxy/share/geometry_msgs/cmake)
+[5.175s] -- Found nav_msgs: 2.0.5 (/opt/ros/foxy/share/nav_msgs/cmake)
+[5.333s] -- Found sensor_msgs: 2.0.5 (/opt/ros/foxy/share/sensor_msgs/cmake)
+[5.531s] -- Found pcl_ros: 2.2.1 (/opt/ros/foxy/share/pcl_ros/cmake)
+[6.115s] -- Found eigen3_cmake_module: 0.1.1 (/opt/ros/foxy/share/eigen3_cmake_module/cmake)
+[6.131s] -- Found Eigen3: TRUE (found version "3.3.7") 
+[6.912s] -- Checking for module 'eigen3'
+[6.965s] --   Found eigen3, version 3.3.7
+[7.117s] -- Found Eigen: /usr/include/eigen3 (Required is at least version "3.1") 
+[7.118s] -- Eigen found (include: /usr/include/eigen3, version: 3.3.7)
+[7.299s] -- Checking for module 'flann'
+[7.364s] --   Found flann, version 1.9.1
+[7.620s] -- Found FLANN: /usr/lib/aarch64-linux-gnu/libflann_cpp.so  
+[7.720s] -- The imported target "vtkParseOGLExt" references the file
+[7.720s]    "/usr/bin/vtkParseOGLExt-7.1"
+[7.720s] but this file does not exist.  Possible reasons include:
+[7.720s] * The file was deleted, renamed, or moved to another location.
+[7.720s] * An install or uninstall procedure did not complete successfully.
+[7.721s] * The installation package was faulty and contained
+[7.721s]    "/usr/lib/cmake/vtk-7.1/VTKTargets.cmake"
+[7.721s] but not all the files it references.
+[7.721s] 
+[7.728s] -- The imported target "vtkRenderingPythonTkWidgets" references the file
+[7.728s]    "/usr/lib/aarch64-linux-gnu/libvtkRenderingPythonTkWidgets.so"
+[7.728s] but this file does not exist.  Possible reasons include:
+[7.728s] * The file was deleted, renamed, or moved to another location.
+[7.728s] * An install or uninstall procedure did not complete successfully.
+[7.728s] * The installation package was faulty and contained
+[7.729s]    "/usr/lib/cmake/vtk-7.1/VTKTargets.cmake"
+[7.729s] but not all the files it references.
+[7.729s] 
+[7.729s] -- The imported target "vtk" references the file
+[7.729s]    "/usr/bin/vtk"
+[7.729s] but this file does not exist.  Possible reasons include:
+[7.729s] * The file was deleted, renamed, or moved to another location.
+[7.729s] * An install or uninstall procedure did not complete successfully.
+[7.729s] * The installation package was faulty and contained
+[7.730s]    "/usr/lib/cmake/vtk-7.1/VTKTargets.cmake"
+[7.730s] but not all the files it references.
+[7.730s] 
+[7.730s] -- The imported target "pvtk" references the file
+[7.730s]    "/usr/bin/pvtk"
+[7.730s] but this file does not exist.  Possible reasons include:
+[7.730s] * The file was deleted, renamed, or moved to another location.
+[7.730s] * An install or uninstall procedure did not complete successfully.
+[7.730s] * The installation package was faulty and contained
+[7.730s]    "/usr/lib/cmake/vtk-7.1/VTKTargets.cmake"
+[7.731s] but not all the files it references.
+[7.731s] 
+[7.798s] -- Checking for module 'libusb-1.0'
+[7.927s] --   Found libusb-1.0, version 1.0.23
+[8.133s] -- Found USB_10: /usr/lib/aarch64-linux-gnu/libusb-1.0.so  
+[8.361s] -- OpenNI found (include: /usr/include/ni, lib: /usr/lib/libOpenNI.so)
+[8.633s] -- OpenNI2 found (include: /usr/include/openni2, lib: /usr/lib/libOpenNI2.so)
+[8.660s] -- Found libusb-1.0: /usr/include  
+[8.673s] -- OpenNI found (include: /usr/include/ni, lib: /usr/lib/libOpenNI.so)
+[8.688s] -- OpenNI2 found (include: /usr/include/openni2, lib: /usr/lib/libOpenNI2.so)
+[8.792s] -- Found Qhull: optimized;/usr/lib/aarch64-linux-gnu/libqhull.so;debug;/usr/lib/aarch64-linux-gnu/libqhull.so  
+[8.792s] -- QHULL found (include: /usr/include, lib: optimized;/usr/lib/aarch64-linux-gnu/libqhull.so;debug;/usr/lib/aarch64-linux-gnu/libqhull.so)
+[8.816s] -- OpenNI found (include: /usr/include/ni, lib: /usr/lib/libOpenNI.so)
+[8.841s] -- Found PCL_COMMON: /usr/lib/aarch64-linux-gnu/libpcl_common.so  
+[8.844s] -- Found PCL_KDTREE: /usr/lib/aarch64-linux-gnu/libpcl_kdtree.so  
+[8.847s] -- Found PCL_OCTREE: /usr/lib/aarch64-linux-gnu/libpcl_octree.so  
+[8.849s] -- Found PCL_SEARCH: /usr/lib/aarch64-linux-gnu/libpcl_search.so  
+[8.852s] -- Found PCL_SAMPLE_CONSENSUS: /usr/lib/aarch64-linux-gnu/libpcl_sample_consensus.so  
+[8.856s] -- Found PCL_FILTERS: /usr/lib/aarch64-linux-gnu/libpcl_filters.so  
+[8.856s] -- Found PCL_2D: /usr/include/pcl-1.10  
+[8.860s] -- Found PCL_GEOMETRY: /usr/include/pcl-1.10  
+[8.860s] -- Found PCL_IO: /usr/lib/aarch64-linux-gnu/libpcl_io.so  
+[8.863s] -- Found PCL_FEATURES: /usr/lib/aarch64-linux-gnu/libpcl_features.so  
+[8.865s] -- Found PCL_ML: /usr/lib/aarch64-linux-gnu/libpcl_ml.so  
+[8.867s] -- Found PCL_SEGMENTATION: /usr/lib/aarch64-linux-gnu/libpcl_segmentation.so  
+[8.869s] -- Found PCL_VISUALIZATION: /usr/lib/aarch64-linux-gnu/libpcl_visualization.so  
+[8.871s] -- Found PCL_SURFACE: /usr/lib/aarch64-linux-gnu/libpcl_surface.so  
+[8.873s] -- Found PCL_REGISTRATION: /usr/lib/aarch64-linux-gnu/libpcl_registration.so  
+[8.875s] -- Found PCL_KEYPOINTS: /usr/lib/aarch64-linux-gnu/libpcl_keypoints.so  
+[8.877s] -- Found PCL_TRACKING: /usr/lib/aarch64-linux-gnu/libpcl_tracking.so  
+[8.879s] -- Found PCL_RECOGNITION: /usr/lib/aarch64-linux-gnu/libpcl_recognition.so  
+[8.881s] -- Found PCL_STEREO: /usr/lib/aarch64-linux-gnu/libpcl_stereo.so  
+[8.884s] -- Found PCL_APPS: /usr/lib/aarch64-linux-gnu/libpcl_apps.so  
+[8.885s] -- Found PCL_IN_HAND_SCANNER: /usr/include/pcl-1.10  
+[8.886s] -- Found PCL_POINT_CLOUD_EDITOR: /usr/include/pcl-1.10  
+[8.889s] -- Found PCL_OUTOFCORE: /usr/lib/aarch64-linux-gnu/libpcl_outofcore.so  
+[8.891s] -- Found PCL_PEOPLE: /usr/lib/aarch64-linux-gnu/libpcl_people.so  
+[9.236s] -- Found visualization_msgs: 2.0.5 (/opt/ros/foxy/share/visualization_msgs/cmake)
+[10.274s] -- Found PythonLibs: /usr/lib/aarch64-linux-gnu/libpython3.8.so (found version "3.8.10") 
+[10.488s] -- Configuring done
+[10.652s] -- Generating done
+[10.696s] -- Build files have been written to: /home/wheeltec/lierrong_ws/src/point_lio_ros2/build/point_lio
+[10.771s] Invoked command in '/home/wheeltec/lierrong_ws/src/point_lio_ros2/build/point_lio' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/foxy /usr/bin/cmake /home/wheeltec/lierrong_ws/src/point_lio_ros2 -DCMAKE_INSTALL_PREFIX=/home/wheeltec/lierrong_ws/src/point_lio_ros2/install/point_lio
+[10.773s] Invoking command in '/home/wheeltec/lierrong_ws/src/point_lio_ros2/build/point_lio': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/foxy /usr/bin/cmake --build /home/wheeltec/lierrong_ws/src/point_lio_ros2/build/point_lio -- -j6 -l6
+[10.860s] [35m[1mScanning dependencies of target pointlio_mapping[0m
+[11.610s] [ 16%] [32mBuilding CXX object CMakeFiles/pointlio_mapping.dir/src/laserMapping.cpp.o[0m
+[86.305s] [ 33%] [32mBuilding CXX object CMakeFiles/pointlio_mapping.dir/include/ikd-Tree/ikd_Tree.cpp.o[0m
+[86.305s] [ 50%] [32mBuilding CXX object CMakeFiles/pointlio_mapping.dir/src/parameters.cpp.o[0m
+[86.306s] [ 83%] [32mBuilding CXX object CMakeFiles/pointlio_mapping.dir/src/Estimator.cpp.o[0m
+[86.306s] [ 83%] [32mBuilding CXX object CMakeFiles/pointlio_mapping.dir/src/preprocess.cpp.o[0m
+[121.412s] [100%] [32m[1mLinking CXX executable pointlio_mapping[0m
+[123.877s] [100%] Built target pointlio_mapping
+[123.907s] Invoked command in '/home/wheeltec/lierrong_ws/src/point_lio_ros2/build/point_lio' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/foxy /usr/bin/cmake --build /home/wheeltec/lierrong_ws/src/point_lio_ros2/build/point_lio -- -j6 -l6
+[123.940s] Invoking command in '/home/wheeltec/lierrong_ws/src/point_lio_ros2/build/point_lio': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/foxy /usr/bin/cmake --install /home/wheeltec/lierrong_ws/src/point_lio_ros2/build/point_lio
+[123.962s] -- Install configuration: ""
+[123.962s] -- Installing: /home/wheeltec/lierrong_ws/src/point_lio_ros2/install/point_lio/lib/point_lio/pointlio_mapping
+[123.965s] -- Set runtime path of "/home/wheeltec/lierrong_ws/src/point_lio_ros2/install/point_lio/lib/point_lio/pointlio_mapping" to ""
+[123.966s] -- Installing: /home/wheeltec/lierrong_ws/src/point_lio_ros2/install/point_lio/share/point_lio/config
+[123.966s] -- Installing: /home/wheeltec/lierrong_ws/src/point_lio_ros2/install/point_lio/share/point_lio/config/avia.yaml
+[123.966s] -- Installing: /home/wheeltec/lierrong_ws/src/point_lio_ros2/install/point_lio/share/point_lio/config/unilidar_l1.yaml
+[123.967s] -- Installing: /home/wheeltec/lierrong_ws/src/point_lio_ros2/install/point_lio/share/point_lio/config/ouster64.yaml
+[123.967s] -- Installing: /home/wheeltec/lierrong_ws/src/point_lio_ros2/install/point_lio/share/point_lio/config/unilidar_l2.yaml
+[123.967s] -- Installing: /home/wheeltec/lierrong_ws/src/point_lio_ros2/install/point_lio/share/point_lio/config/mid360.yaml
+[123.967s] -- Installing: /home/wheeltec/lierrong_ws/src/point_lio_ros2/install/point_lio/share/point_lio/config/horizon.yaml
+[123.968s] -- Installing: /home/wheeltec/lierrong_ws/src/point_lio_ros2/install/point_lio/share/point_lio/config/velody16.yaml
+[123.968s] -- Installing: /home/wheeltec/lierrong_ws/src/point_lio_ros2/install/point_lio/share/point_lio/launch
+[123.968s] -- Installing: /home/wheeltec/lierrong_ws/src/point_lio_ros2/install/point_lio/share/point_lio/launch/mapping_unilidar_l1.launch.py
+[123.968s] -- Installing: /home/wheeltec/lierrong_ws/src/point_lio_ros2/install/point_lio/share/point_lio/launch/mapping_ouster64.launch.py
+[123.969s] -- Installing: /home/wheeltec/lierrong_ws/src/point_lio_ros2/install/point_lio/share/point_lio/launch/gdb_debug_example.launch.py
+[123.969s] -- Installing: /home/wheeltec/lierrong_ws/src/point_lio_ros2/install/point_lio/share/point_lio/launch/correct_odom_unilidar_l1.launch.py
+[123.969s] -- Installing: /home/wheeltec/lierrong_ws/src/point_lio_ros2/install/point_lio/share/point_lio/launch/mapping_velody16.launch.py
+[123.969s] -- Installing: /home/wheeltec/lierrong_ws/src/point_lio_ros2/install/point_lio/share/point_lio/launch/mapping_avia.launch.py
+[123.970s] -- Installing: /home/wheeltec/lierrong_ws/src/point_lio_ros2/install/point_lio/share/point_lio/launch/correct_odom_unilidar_l2.launch.py
+[123.970s] -- Installing: /home/wheeltec/lierrong_ws/src/point_lio_ros2/install/point_lio/share/point_lio/launch/mapping_horizon.launch.py
+[123.970s] -- Installing: /home/wheeltec/lierrong_ws/src/point_lio_ros2/install/point_lio/share/point_lio/launch/mapping_unilidar_l2.launch.py
+[123.970s] -- Installing: /home/wheeltec/lierrong_ws/src/point_lio_ros2/install/point_lio/share/point_lio/launch/mapping_mid360.launch.py
+[123.970s] -- Installing: /home/wheeltec/lierrong_ws/src/point_lio_ros2/install/point_lio/share/point_lio/rviz_cfg
+[123.971s] -- Installing: /home/wheeltec/lierrong_ws/src/point_lio_ros2/install/point_lio/share/point_lio/rviz_cfg/loam_livox.rviz
+[123.972s] -- Installing: /home/wheeltec/lierrong_ws/src/point_lio_ros2/install/point_lio/share/ament_index/resource_index/package_run_dependencies/point_lio
+[123.972s] -- Installing: /home/wheeltec/lierrong_ws/src/point_lio_ros2/install/point_lio/share/ament_index/resource_index/parent_prefix_path/point_lio
+[123.974s] -- Installing: /home/wheeltec/lierrong_ws/src/point_lio_ros2/install/point_lio/share/point_lio/environment/ament_prefix_path.sh
+[123.975s] -- Installing: /home/wheeltec/lierrong_ws/src/point_lio_ros2/install/point_lio/share/point_lio/environment/ament_prefix_path.dsv
+[123.975s] -- Installing: /home/wheeltec/lierrong_ws/src/point_lio_ros2/install/point_lio/share/point_lio/environment/path.sh
+[123.976s] -- Installing: /home/wheeltec/lierrong_ws/src/point_lio_ros2/install/point_lio/share/point_lio/environment/path.dsv
+[123.976s] -- Installing: /home/wheeltec/lierrong_ws/src/point_lio_ros2/install/point_lio/share/point_lio/local_setup.bash
+[123.976s] -- Installing: /home/wheeltec/lierrong_ws/src/point_lio_ros2/install/point_lio/share/point_lio/local_setup.sh
+[123.977s] -- Installing: /home/wheeltec/lierrong_ws/src/point_lio_ros2/install/point_lio/share/point_lio/local_setup.zsh
+[123.977s] -- Installing: /home/wheeltec/lierrong_ws/src/point_lio_ros2/install/point_lio/share/point_lio/local_setup.dsv
+[123.977s] -- Installing: /home/wheeltec/lierrong_ws/src/point_lio_ros2/install/point_lio/share/point_lio/package.dsv
+[123.978s] -- Installing: /home/wheeltec/lierrong_ws/src/point_lio_ros2/install/point_lio/share/ament_index/resource_index/packages/point_lio
+[123.978s] -- Installing: /home/wheeltec/lierrong_ws/src/point_lio_ros2/install/point_lio/share/point_lio/cmake/ament_cmake_export_dependencies-extras.cmake
+[123.979s] -- Installing: /home/wheeltec/lierrong_ws/src/point_lio_ros2/install/point_lio/share/point_lio/cmake/point_lioConfig.cmake
+[123.979s] -- Installing: /home/wheeltec/lierrong_ws/src/point_lio_ros2/install/point_lio/share/point_lio/cmake/point_lioConfig-version.cmake
+[123.979s] -- Installing: /home/wheeltec/lierrong_ws/src/point_lio_ros2/install/point_lio/share/point_lio/package.xml
+[123.985s] Invoked command in '/home/wheeltec/lierrong_ws/src/point_lio_ros2/build/point_lio' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/foxy /usr/bin/cmake --install /home/wheeltec/lierrong_ws/src/point_lio_ros2/build/point_lio
