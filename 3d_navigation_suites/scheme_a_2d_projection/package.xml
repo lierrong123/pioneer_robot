@@ -1,0 +1,38 @@
+<?xml version="1.0"?>
+<?xml-model href="http://download.ros.org/schema/package_format3.xsd" schematypens="http://www.w3.org/2001/XMLSchema"?>
+<package format="3">
+  <name>scheme_a_2d_projection</name>
+  <version>1.0.0</version>
+  <description>方案A：八叉树投影为2D的导航方案</description>
+  <maintainer email="wheeltec@example.com">wheeltec</maintainer>
+  <license>Apache-2.0</license>
+
+  <buildtool_depend>ament_python</buildtool_depend>
+
+  <!-- ROS2核心依赖 -->
+  <depend>nav2_bringup</depend>
+  <depend>octomap_server</depend>
+  <depend>octomap_msgs</depend>
+  <depend>tf2_ros</depend>
+  <depend>rviz2</depend>
+  <depend>launch_ros</depend>
+  <depend>geometry_msgs</depend>
+  <depend>sensor_msgs</depend>
+  
+  <!-- 机器人特定依赖 -->
+  <exec_depend>wheeltec_joy</exec_depend>
+  <exec_depend>pioneerbot_description</exec_depend>
+  <exec_depend>point_lio</exec_depend>
+  <exec_depend>unitree_l2_converter</exec_depend>
+  <exec_depend>gazebo_ros</exec_depend>
+  <exec_depend>robot_state_publisher</exec_depend>
+
+  <test_depend>ament_copyright</test_depend>
+  <test_depend>ament_flake8</test_depend>
+  <test_depend>ament_pep257</test_depend>
+  <test_depend>python3-pytest</test_depend>
+
+  <export>
+    <build_type>ament_python</build_type>
+  </export>
+</package>
