@@ -1,0 +1,90 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="pioneer_robot">
+    <!-- 包含文件 -->
+    <xacro:include filename="$(find pioneerbot_description)/urdf/pioneer/base.urdf.xacro"/>
+    <xacro:include filename="$(find pioneerbot_description)/urdf/pioneer/actuator/mecanumwheel.urdf.xacro"/>
+    <xacro:include filename="$(find pioneerbot_description)/urdf/pioneer/controllers/omni_drive.urdf.xacro"/>
+    <!-- 包含 Velodyne 激光雷达 -->
+    <xacro:include filename="$(find pioneerbot_description)/urdf/pioneer/controllers/velodyne.urdf.xacro"/>
+    <xacro:include filename="$(find pioneerbot_description)/urdf/pioneer/controllers/camera.gazebo.xacro"/>
+    <!-- 其他传感器包含保持不变 -->
+    <xacro:include filename="$(find pioneerbot_description)/urdf/pioneer/sensor/imu.urdf.xacro"/>
+    <xacro:include filename="$(find pioneerbot_description)/urdf/pioneer/sensor/camera.urdf.xacro"/>
+    <xacro:include filename="$(find pioneerbot_description)/urdf/pioneer/sensor/laser.urdf.xacro"/>
+    <xacro:include filename="$(find pioneerbot_description)/urdf/pioneer/sensor/pole.urdf.xacro"/>
+    <xacro:include filename="$(find pioneerbot_description)/urdf/pioneer/sensor/plate.urdf.xacro"/>
+
+    <!-- 轮子参数 -->
+    <xacro:property name="wheel_separation_x" value="0.332" />
+    <xacro:property name="wheel_separation_y" value="0.25" />
+    <xacro:property name="wheel_radius" value="0.05" />
+    <xacro:property name="base_link_height" value="0.078537" />
+    <xacro:property name="wheel_embed_depth" value="0.008537" />
+    
+    <!-- 基础底盘 -->
+    <xacro:base_xacro size="0.4 0.45 0.003"/>
+    
+    <!-- ============ 麦克纳姆轮定义 ============ -->
+    <!-- 前左轮 -->
+    <xacro:mecanumwheel_xacro 
+        wheelname="front_left_wheel_joint"
+        side="front_left"
+        xyz="${wheel_separation_y/2} ${wheel_separation_x/2} -0.028537"/>
+    
+    <!-- 前右轮 -->
+    <xacro:mecanumwheel_xacro 
+        wheelname="front_right_wheel_joint"
+        side="front_right"
+        xyz="${wheel_separation_y/2} -${wheel_separation_x/2} -0.028537"/>
+    
+    <!-- 后左轮 -->
+    <xacro:mecanumwheel_xacro 
+        wheelname="rear_left_wheel_joint"
+        side="rear_left"
+        xyz="${-wheel_separation_y/2} ${wheel_separation_x/2} -0.028537"/>
+    
+    <!-- 后右轮 -->
+    <xacro:mecanumwheel_xacro 
+        wheelname="rear_right_wheel_joint"
+        side="rear_right"
+        xyz="${-wheel_separation_y/2} -${wheel_separation_x/2} -0.028537"/>
+    
+    <!-- ============ 传感器安装 ============ -->
+    <xacro:imu_xacro xyz="0.15 0 0.00875"/>
+    <xacro:camera_xacro xyz="0.1582 0 0.232"/>
+    
+    <!-- 添加 Velodyne 激光雷达 -->
+    <xacro:velodyne_xacro 
+        parent_link="base_link" 
+        xyz="0.08484 0 0.289262"
+        rpy="0 0.6978888 0" 
+        topic_name="/unilidar/cloud"  
+        neg_angle_mode="true"/>
+    
+    <!-- 安装L2IMU（发布数据到 /unitree_lidar/imu） -->
+    <xacro:unitree_l2_imu_xacro 
+        parent_link="velodyne_link"
+        xyz="0 0 -0.02"
+        rpy="0 0 0"
+        imu_topic_name="/unilidar/imu"  
+        frame_name="L2imu_link"/>
+    <!-- 其他传感器保持不变 -->
+    <xacro:laser_xacro xyz="0.08484 0 0.289262"/>
+    <xacro:pole_xacro size="0.02 0.02 0.15" xyz="0.05 0.166 0.0765" polename="pole_150_1"/>
+    <xacro:pole_xacro size="0.02 0.02 0.15" xyz="0.05 -0.166 0.0765" polename="pole_150_2"/>
+    <xacro:pole_xacro size="0.02 0.02 0.15" xyz="-0.17 -0.110 0.0765" polename="pole_150_3"/>
+    <xacro:pole_xacro size="0.02 0.02 0.15" xyz="-0.17 0.110 0.0765" polename="pole_150_4"/>
+    <xacro:plate_xacro xyz="-0.009298 0.000 0.153000" name="second_plate" weight="3.17"/>
+    <xacro:pole_xacro polename="pole_100_1" size="0.02 0.02 0.10" xyz="0.050 0.135582 0.2045"/>
+    <xacro:pole_xacro polename="pole_100_2" size="0.02 0.02 0.10" xyz="0.050 -0.135582 0.2045"/>
+    <xacro:pole_xacro polename="pole_100_3" size="0.02 0.02 0.10" xyz="-0.170 -0.139418 0.2045"/>
+    <xacro:pole_xacro polename="pole_100_4" size="0.02 0.02 0.10" xyz="-0.170 0.139418 0.2045"/>
+    <xacro:plate_xacro name="third_plate" xyz="-0.009298 0.000 0.256000" weight="2.91"/>
+
+    <!-- ============ 麦轮控制器插件 ============ -->
+    <xacro:omni_drive_controller 
+        wheel_separation="${wheel_separation_x}" 
+        wheel_base="${wheel_separation_y}" 
+        wheel_radius="${wheel_radius}" />
+    <xacro:camera_gazebo_xacro/>
+</robot>

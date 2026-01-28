@@ -1,0 +1,41 @@
+<robot xmlns:xacro="https://www.ros.org/wiki/xacro" name = "pioneer_robot">
+    <xacro:include filename="$(find pioneerbot_description)/urdf/pioneer/common_inertial.xacro"/>
+    <xacro:macro name = "base_xacro" params="size">
+        <link name="base_footprint"/>
+        <link name="base_link">
+            <!-- 部件外观描述 -->
+            <visual>
+                <!-- 沿着自己的几何中心的偏移和旋转量 -->
+                <origin  xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
+                <!-- 几何形状 -->
+                <geometry>
+                    <box size="${size}"/>
+                </geometry>
+                <!-- 材质颜色 -->
+                <material name = "white">
+                    <color rgba="1.0 1.0 1.0 0.5"/>
+                </material>
+            </visual>
+            <collision>
+            <!-- 碰撞体积 -->
+               <origin  xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
+                <!-- 几何形状 -->
+                <geometry>
+                    <box size="${size}"/>
+                </geometry>
+                <!-- 材质颜色 -->
+                <material name = "white">
+                    <color rgba="1.0 1.0 1.0 0.5"/>
+                </material>
+            </collision>
+            <xacro:box_inertia m="6.08" w="0.4" h="0.003" d="0.45" />
+            
+        </link>
+        <joint name="joint_name" type="fixed">
+            <origin xyz="0.0 0.0 0.078537" rpy="0.0 0.0 0.0"/>
+            <parent link="base_footprint"/>
+            <child link="base_link"/>
+
+        </joint>
+    </xacro:macro>
+</robot>

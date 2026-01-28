@@ -1,0 +1,138 @@
+<robot xmlns:xacro="https://www.ros.org/wiki/xacro">
+    <xacro:include filename="$(find pioneerbot_description)/urdf/pioneer/common_inertial.xacro"/>
+    
+    <xacro:macro name="imu_xacro" params="xyz topic_name:='imu/data' frame_name:='imu_link' update_rate:=30">
+        <link name="${frame_name}">
+            <!-- 部件外观描述 -->
+            <visual>
+                <!-- 沿着自己的几何中心的偏移和旋转量 -->
+                <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
+                <!-- 几何形状 -->
+                <geometry>
+                    <box size="0.0245 0.0245 0.0145"/> 
+                </geometry>
+                <!-- 材质颜色 -->
+                <material name="black">
+                    <color rgba="0.0 0.0 0.0 1.0"/>
+                </material>
+            </visual>
+            <collision>
+                <!-- 沿着自己的几何中心的偏移和旋转量 -->
+                <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
+                <!-- 几何形状 -->
+                <geometry>
+                    <box size="0.0245 0.0245 0.0145"/> 
+                </geometry>
+                <!-- 材质颜色 -->
+                <material name="black">
+                    <color rgba="0.0 0.0 0.0 1.0"/>
+                </material>
+            </collision>
+            <!-- 惯性参数 -->
+            <inertial>
+                <mass value="0.01"/>  <!-- 假设重量10克 -->
+                <origin xyz="0 0 0" rpy="0 0 0"/>
+                <inertia ixx="1e-6" ixy="0" ixz="0" iyy="1e-6" iyz="0" izz="1e-6"/>
+            </inertial>
+        </link>
+        
+        <!-- 机器人的关节 -->
+        <joint name="${frame_name}_joint" type="fixed">
+            <origin xyz="${xyz}" rpy="0.0 0.0 0.0"/>
+            <parent link="base_link"/>
+            <child link="${frame_name}"/>
+        </joint>
+        
+        <!-- Gazebo IMU传感器配置 -->
+        <gazebo reference="${frame_name}">
+            <material>Gazebo/Black</material>
+            
+            <!-- WHEELTEC N100 IMU传感器 -->
+            <sensor name="${frame_name}_sensor" type="imu">
+                <always_on>true</always_on>
+                <update_rate>${update_rate}</update_rate>
+                <visualize>true</visualize>
+                <gravity>true</gravity>
+                
+                <imu>
+                    <!-- 角速度（陀螺仪）噪声参数 -->
+                    <angular_velocity>
+                        <x>
+                            <noise type="gaussian">
+                                <!-- 角速度噪声密度：0.0028°/s/√Hz，带宽：256Hz -->
+                                <!-- 计算：0.0028°/s/√Hz × √256 × (π/180) = 0.0028 × 16 × 0.01745 ≈ 0.00078 rad/s -->
+                                <mean>0.0</mean>
+                                <stddev>0.00078</stddev>
+                                <!-- 零偏稳定性：<10°/hr = 10°/3600s = 0.00278°/s = 4.85e-5 rad/s -->
+                                <bias_mean>4.85e-5</bias_mean>
+                                <bias_stddev>4.85e-6</bias_stddev>
+                            </noise>
+                        </x>
+                        <y>
+                            <noise type="gaussian">
+                                <mean>0.0</mean>
+                                <stddev>0.00078</stddev>
+                                <bias_mean>4.85e-5</bias_mean>
+                                <bias_stddev>4.85e-6</bias_stddev>
+                            </noise>
+                        </y>
+                        <z>
+                            <noise type="gaussian">
+                                <mean>0.0</mean>
+                                <stddev>0.00078</stddev>
+                                <bias_mean>4.85e-5</bias_mean>
+                                <bias_stddev>4.85e-6</bias_stddev>
+                            </noise>
+                        </z>
+                    </angular_velocity>
+                    
+                    <!-- 线加速度（加速度计）噪声参数 -->
+                    <linear_acceleration>
+                        <x>
+                            <noise type="gaussian">
+                                <!-- 加速度噪声密度：75μg/√Hz = 75e-6 g/√Hz，带宽：260Hz -->
+                                <!-- 计算：75e-6 × 9.81 m/s² × √260 = 7.3575e-4 × 16.12 ≈ 0.01186 m/s² -->
+                                <mean>0.0</mean>
+                                <stddev>0.01186</stddev>
+                                <!-- 零偏稳定性：<0.04 mg = 0.04e-3 g = 3.92e-4 m/s² -->
+                                <bias_mean>3.92e-4</bias_mean>
+                                <bias_stddev>3.92e-5</bias_stddev>
+                            </noise>
+                        </x>
+                        <y>
+                            <noise type="gaussian">
+                                <mean>0.0</mean>
+                                <stddev>0.01186</stddev>
+                                <bias_mean>3.92e-4</bias_mean>
+                                <bias_stddev>3.92e-5</bias_stddev>
+                            </noise>
+                        </y>
+                        <z>
+                            <noise type="gaussian">
+                                <mean>0.0</mean>
+                                <stddev>0.01186</stddev>
+                                <bias_mean>3.92e-4</bias_mean>
+                                <bias_stddev>3.92e-5</bias_stddev>
+                            </noise>
+                        </z>
+                    </linear_acceleration>
+                </imu>
+                
+                <!-- ROS插件配置 -->
+                <plugin filename="libgazebo_ros_imu_sensor.so" name="${frame_name}_plugin">
+                    <ros>
+                        <namespace>/</namespace>
+                        <remapping>~/out:=${topic_name}</remapping>
+                    </ros>
+                    <frame_name>${frame_name}</frame_name>
+                    <topic_name>${topic_name}</topic_name>
+                    <update_rate_hz>${update_rate}</update_rate_hz>
+                    <gaussian_noise>0.0001</gaussian_noise>
+                    <xyz_offset>0 0 0</xyz_offset>
+                    <rpy_offset>0 0 0</rpy_offset>
+                    <initial_orientation_as_reference>true</initial_orientation_as_reference>
+                </plugin>
+            </sensor>
+        </gazebo>
+    </xacro:macro>
+</robot>

@@ -1,0 +1,226 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="unitree_lidar_l2">
+    <xacro:macro name="velodyne_xacro" params="parent_link xyz rpy='0 0 0' topic_name:='unitree_lidar/point_cloud' frame_name:='velodyne_link' neg_angle_mode:=true">
+        <!-- Unitree 4D LiDAR-L2 Link -->
+        <link name="${frame_name}">
+            <visual>
+                <origin xyz="0 0 0.0325" rpy="0 0 0"/>
+                <geometry>
+                    <box size="0.075 0.075 0.065"/>  <!-- 75x75x65mm -->
+                </geometry>
+                <material name="unitree_black">
+                    <color rgba="0.15 0.15 0.15 1.0"/>
+                </material>
+            </visual>
+            <collision>
+                <origin xyz="0 0 0.0325" rpy="0 0 0"/>
+                <geometry>
+                    <box size="0.075 0.075 0.065"/>
+                </geometry>
+            </collision>
+            <inertial>
+                <mass value="0.23"/>  <!-- 230克 -->
+                <origin xyz="0 0 0.0325" rpy="0 0 0"/>
+                <inertia ixx="0.0001" ixy="0" ixz="0" 
+                         iyy="0.0001" iyz="0" 
+                         izz="0.00005"/>
+            </inertial>
+        </link>
+
+        <!-- Joint to parent link -->
+        <joint name="${frame_name}_joint" type="fixed">
+            <parent link="${parent_link}"/>
+            <child link="${frame_name}"/>
+            <origin xyz="${xyz}" rpy="${rpy}"/>
+        </joint>
+
+        <!-- Gazebo Plugin Configuration -->
+        <gazebo reference="${frame_name}">
+            <material>Gazebo/Black</material>
+            <sensor type="ray" name="${frame_name}_sensor">
+                <pose>0 0 0.0325 0 0 0</pose>
+                <visualize>true</visualize>
+                <update_rate>5.5</update_rate>  <!-- 周向扫描频率5.5Hz -->
+                <ray>
+                    <scan>
+                        <horizontal>
+                            <samples>563</samples>  <!-- 水平角分辨率0.64°，360°/0.64°≈563 -->
+                            <resolution>1.0</resolution>
+                            <min_angle>-3.14159</min_angle>  <!-- -180° -->
+                            <max_angle>3.14159</max_angle>   <!-- 180° -->
+                        </horizontal>
+                        <vertical>
+                            <xacro:if value="${neg_angle_mode}">
+                                <!-- 负角度模式：-6°到90° FOV（总共96°） -->
+                                <samples>40</samples>  <!-- 96°/2.4°≈40线 -->
+                                <resolution>1.0</resolution>
+                                <min_angle>-0.10472</min_angle>  <!-- -6° -->
+                                <max_angle>1.5708</max_angle>    <!-- 90° -->
+                            </xacro:if>
+                            <xacro:unless value="${neg_angle_mode}">
+                                <!-- 正常模式：0°到90° FOV -->
+                                <samples>38</samples>  <!-- 90°/2.37°≈38线 -->
+                                <resolution>1.0</resolution>
+                                <min_angle>0.0</min_angle>       <!-- 0° -->
+                                <max_angle>1.5708</max_angle>    <!-- 90° -->
+                            </xacro:unless>
+                        </vertical>
+                    </scan>
+                    <range>
+                        <min>0.05</min>  <!-- 最近0.05m -->
+                        <max>30.0</max>  <!-- 最远30m（90%反射率） -->
+                        <resolution>0.0045</resolution>  <!-- 测距分辨率4.5mm -->
+                    </range>
+                    <noise>
+                        <type>gaussian</type>
+                        <mean>0.0</mean>
+                        <stddev>0.02</stddev>  <!-- 测量精度≤2cm -->
+                    </noise>
+                </ray>
+                <plugin name="lidar_controller" filename="libgazebo_ros_ray_sensor.so">
+                    <ros>
+                        <namespace>/</namespace>
+                        <remapping>~/out:=${topic_name}</remapping>  <!-- 使用参数化话题名称 -->
+                    </ros>
+                    <frame_name>${frame_name}</frame_name>
+                    <radiation_type>lidar</radiation_type>
+                    <fov>6.28319</fov>  <!-- 360° -->
+                    <xacro:if value="${neg_angle_mode}">
+                        <vertical_fov>1.67552</vertical_fov>  <!-- 96° -->
+                    </xacro:if>
+                    <xacro:unless value="${neg_angle_mode}">
+                        <vertical_fov>1.5708</vertical_fov>   <!-- 90° -->
+                    </xacro:unless>
+                    <horizontal_samples>563</horizontal_samples>
+                    <vertical_samples>
+                        <xacro:if value="${neg_angle_mode}">40</xacro:if>
+                        <xacro:unless value="${neg_angle_mode}">38</xacro:unless>
+                    </vertical_samples>
+                    <update_rate>5.5</update_rate>
+                    <min_range>0.05</min_range>
+                    <max_range>30.0</max_range>
+                    <noise_mean>0.0</noise_mean>
+                    <noise_stddev>0.02</noise_stddev>
+                    <use_ring_index>true</use_ring_index>
+                    <use_timestamp>true</use_timestamp>
+                </plugin>
+            </sensor>
+        </gazebo>
+    </xacro:macro>
+
+    <!-- L2 IMU 宏定义 -->
+    <xacro:macro name="unitree_l2_imu_xacro" params="parent_link xyz rpy='0 0 0' imu_topic_name:='unitree_lidar/imu' frame_name:='imu_link'">
+        <!-- IMU Link -->
+        <link name="${frame_name}">
+            <visual>
+                <origin xyz="0 0 0" rpy="0 0 0"/>
+                <geometry>
+                    <box size="0.02 0.02 0.01"/>
+                </geometry>
+                <material name="imu_green">
+                    <color rgba="0.0 0.8 0.0 0.5"/>
+                </material>
+            </visual>
+
+            <collision>
+                <origin xyz="0 0 0" rpy="0 0 0"/>
+                <geometry>
+                    <box size="0.02 0.02 0.01"/>
+                </geometry>
+            </collision>
+            <inertial>
+                <mass value="0.01"/>
+                <origin xyz="0 0 0" rpy="0 0 0"/>
+                <inertia ixx="0.000001" ixy="0" ixz="0" 
+                         iyy="0.000001" iyz="0" 
+                         izz="0.000001"/>
+            </inertial>
+        </link>
+
+        <!-- IMU Joint -->
+        <joint name="${frame_name}_joint" type="fixed">
+            <parent link="${parent_link}"/>
+            <child link="${frame_name}"/>
+            <origin xyz="${xyz}" rpy="${rpy}"/>
+        </joint>
+
+        <!-- Gazebo IMU Plugin -->
+        <gazebo reference="${frame_name}">
+            <sensor type="imu" name="${frame_name}_imu_sensor">
+                <always_on>true</always_on>
+                <update_rate>500</update_rate>  <!-- L2 IMU上报频率500Hz -->
+                <imu>
+                    <angular_velocity>
+                        <x>
+                            <noise type="gaussian">
+                                <mean>0.0</mean>
+                                <stddev>0.000349</stddev>  <!-- 约0.02°/s -->
+                                <bias_mean>0.00001</bias_mean>
+                                <bias_stddev>0.000001</bias_stddev>
+                            </noise>
+                        </x>
+                        <y>
+                            <noise type="gaussian">
+                                <mean>0.0</mean>
+                                <stddev>0.000349</stddev>
+                                <bias_mean>0.00001</bias_mean>
+                                <bias_stddev>0.000001</bias_stddev>
+                            </noise>
+                        </y>
+                        <z>
+                            <noise type="gaussian">
+                                <mean>0.0</mean>
+                                <stddev>0.000349</stddev>
+                                <bias_mean>0.00001</bias_mean>
+                                <bias_stddev>0.000001</bias_stddev>
+                            </noise>
+                        </z>
+                    </angular_velocity>
+                    <linear_acceleration>
+                        <x>
+                            <noise type="gaussian">
+                                <mean>0.0</mean>
+                                <stddev>0.005</stddev>  <!-- 约0.05 m/s² -->
+                                <bias_mean>0.01</bias_mean>
+                                <bias_stddev>0.0001</bias_stddev>
+                            </noise>
+                        </x>
+                        <y>
+                            <noise type="gaussian">
+                                <mean>0.0</mean>
+                                <stddev>0.005</stddev>
+                                <bias_mean>0.01</bias_mean>
+                                <bias_stddev>0.0001</bias_stddev>
+                            </noise>
+                        </y>
+                        <z>
+                            <noise type="gaussian">
+                                <mean>0.0</mean>
+                                <stddev>0.005</stddev>
+                                <bias_mean>0.01</bias_mean>
+                                <bias_stddev>0.0001</bias_stddev>
+                            </noise>
+                        </z>
+                    </linear_acceleration>
+                </imu>
+                    <plugin name="imu_plugin" filename="libgazebo_ros_imu_sensor.so">
+                        <ros>
+                            <namespace>/</namespace>
+                            <remapping>~/out:=${imu_topic_name}</remapping>
+                            <!-- 添加QoS配置 -->
+                            <qos>
+                                <reliability>reliable</reliability>
+                                <history>keep_last</history>
+                                <depth>1000</depth>  <!-- 增加队列深度 -->
+                                <durability>volatile</durability>
+                            </qos>
+                        </ros>
+                        <topicName>${imu_topic_name}</topicName>
+                        <bodyName>${frame_name}</bodyName>
+                        <frameName>${frame_name}</frameName>
+                        <updateRateHZ>500.0</updateRateHZ>
+                    </plugin>
+            </sensor>
+        </gazebo>
+    </xacro:macro>
+</robot>

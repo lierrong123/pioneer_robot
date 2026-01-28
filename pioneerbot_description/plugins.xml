@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<library path="pioneerbot_description">
+  <class name="velodyne_gazebo_plugins/GazeboRosVelodyneLaser" 
+         type="gazebo::GazeboRosVelodyneLaser">
+    <description>
+      Gazebo ROS Velodyne LiDAR plugin
+    </description>
+  </class>
+</library>

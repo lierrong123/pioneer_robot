@@ -1,0 +1,63 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro" xmlns:gz="http://gazebosim.org/schema">
+    <xacro:include filename="$(find pioneerbot_description)/urdf/pioneer/common_inertial.xacro"/>
+    
+    
+    <xacro:macro name = "mecanumwheel_xacro" params="wheelname side xyz">
+        <link name="${wheelname}_link">
+            <visual>
+                <origin xyz="0.0 0.0 0.0" rpy="${pi/2} 0.0 0.0"/>
+                <geometry>
+                    <cylinder radius="0.050" length="0.05"/>
+                </geometry>
+                <material name="yellow">
+                    <color rgba="0.9 0.8 0.1 1.0"/>
+                </material>
+            </visual>
+            <collision>
+                <origin xyz="0.0 0.0 0.0" rpy="${pi/2} 0.0 0.0"/>
+                <geometry>
+                    <cylinder radius="0.050" length="0.05"/>
+                </geometry>
+            </collision>
+            <xacro:cylinder_inertia m="0.38" r="0.050" h="0.05"/>
+        </link>
+        
+        <joint name="${wheelname}" type="continuous">
+            <origin xyz="${xyz}" rpy="0.0 0.0 0.0"/>
+            <parent link="base_link"/>
+            <child link="${wheelname}_link"/>
+            <axis xyz="0.0 1 0"/>
+        </joint>
+        
+        <gazebo reference="${wheelname}_link">
+            <material>Gazebo/Yellow</material>
+            
+            <surface>
+                <friction>
+                    <ode>
+                        <mu>1.5</mu>
+                        <mu2>1.5</mu2>
+                        <slip1>0.1</slip1>
+                        <slip2>0.1</slip2>
+<fdir1>
+    <!-- 模式1：前轮和后轮角度不同 -->
+    <xacro:if value="${side == 'front_left'}">
+        0.707 0.707 0  <!-- 45度 -->
+    </xacro:if>
+    <xacro:if value="${side == 'front_right'}">
+        0.707 -0.707 0  <!-- -45度 -->
+    </xacro:if>
+    <xacro:if value="${side == 'rear_left'}">
+        -0.707 -0.707 0  <!-- -135度 -->
+    </xacro:if>
+    <xacro:if value="${side == 'rear_right'}">
+        -0.707 0.707 0  <!-- 135度 -->
+    </xacro:if>
+</fdir1>
+                    </ode>
+                </friction>
+            </surface>
+        </gazebo>
+    </xacro:macro>
+</robot>
